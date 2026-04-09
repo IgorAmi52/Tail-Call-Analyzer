@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class TailCallAnalyzerTest {
+class IntegrationTest {
 
     @ParameterizedTest(name = "[{index}] {0} => {1}")
     @MethodSource("tailCallTestCases")
