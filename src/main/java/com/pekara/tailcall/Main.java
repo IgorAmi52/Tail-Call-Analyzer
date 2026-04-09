@@ -12,7 +12,9 @@ public class Main {
             String input = readInput(args);
             Scanner scanner = new Scanner(input);
             List<Token> tokens = scanner.scan();
-            tokens.forEach(System.out::println);
+            Parser parser = new Parser(tokens);
+            Definition define = parser.parse();
+            System.out.println(define);
         } catch (TailCallAnalyzerException e) {
             System.err.println("Error: " + e.getMessage());
             System.exit(1);
