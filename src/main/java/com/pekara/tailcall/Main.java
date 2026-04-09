@@ -10,11 +10,8 @@ public class Main {
     public static void main(String[] args) {
         try {
             String input = readInput(args);
-            Scanner scanner = new Scanner(input);
-            List<Token> tokens = scanner.scan();
-            Parser parser = new Parser(tokens);
-            Definition define = parser.parse();
-            System.out.println(define);
+            int count = run(input);
+            System.out.println("Tail-recursive calls: " + count);
         } catch (TailCallAnalyzerException e) {
             System.err.println("Error: " + e.getMessage());
             System.exit(1);
@@ -22,6 +19,15 @@ public class Main {
             System.err.println("I/O Error: " + e.getMessage());
             System.exit(1);
         }
+    }
+
+    static int run(String input) {
+        Scanner scanner = new Scanner(input);
+        List<Token> tokens = scanner.scan();
+        Parser parser = new Parser(tokens);
+        Definition definition = parser.parse();
+        TailCallAnalyzer analyzer = new TailCallAnalyzer();
+        return analyzer.countTailCalls(definition);
     }
 
     private static String readInput(String[] args) throws IOException {
